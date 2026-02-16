@@ -13,7 +13,8 @@ jobs:
 
       - name: Unzip project
         run: |
-          unzip warung_sayur_full_ui_v3_stage5.zip -d app
+          unzip -o warung_sayur_full_ui_v3_stage5_icons.zip -d app
+          shopt -s dotglob
           mv app/* .
           rm -rf app
 
@@ -27,9 +28,16 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+          cache: true
 
-      - name: Generate Android folder
-        run: flutter create .
+      - name: Generate Android folder (only if missing)
+        run: |
+          if [ ! -d "android" ]; then
+            flutter create .
+          fi
+
+      - name: Flutter clean
+        run: flutter clean
 
       - name: Flutter pub get
         run: flutter pub get
