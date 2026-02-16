@@ -13,7 +13,7 @@ jobs:
 
       - name: Unzip project
         run: |
-          unzip warung_sayur_full_ui_v3_stock_history_price.zip -d app
+          unzip warung_sayur_full_ui_v3_fixed.zip -d app
           mv app/* .
           rm -rf app
 
